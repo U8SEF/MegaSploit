@@ -75,3 +75,6 @@ if MISSING:
         Packager.install(i)
     import modules.CLI as CLI
     CLI.run(_version_=__Version__)
+else:
+    import modules.CLI as CLI
+    CLI.run(_version_=__Version__)

