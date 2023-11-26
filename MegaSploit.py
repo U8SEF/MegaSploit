@@ -13,7 +13,7 @@ import modules.Packager as Packager
 
 #=-----=#
 
-__Version__ = "1.0.0"
+__Version__ = "1.0.1"
 RED = "\033[91m"
 GREEN = "\033[92m"
 YELLOW = "\033[93m"
